@@ -1,0 +1,14 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>/</th>
+      <th ng-repeat="char in chars">{{char}}</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="(key, value) in transitions" ng-class="value.class">
+    <th>{{key}}</th>
+    <td ng-repeat="folow in value.folowing track by $index">{{folow}}</td>
+  </tr>
+  </tbody>
+</table>
