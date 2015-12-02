@@ -118,16 +118,19 @@ var GraphDesigner = function(style, svgSelector) {
 
     //rename the node with the given name with a new name
     self.renameNode = function(name, newname) {
-        var renamedNode = false;
-        _.forEach(self.node.nodes, function(node, key) {
-            if (node.name == name) {
-                renamedNode = true;
-                node.name = newname;
-            }
-        })
-        if (!renamedNode) {
-            //node wasnt renamed -> wasnt found
-            console.log("didnt renameNode error");
+        var node = _.where(self.node.nodes, {'name': name});
+
+        if(node==undefined){
+          console.log("didnt renameNode error");
+        }else{
+          node.name = newname;
+          var transitions
+          _.each(['from', 'to'], function(direction){
+            transitions = _.where(self.transitions, {direction: name})
+            _.each(transitions, function(trnasition){
+              transition[direction] = newName;
+            });
+          });
         }
     }
 
