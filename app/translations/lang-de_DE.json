@@ -1,10 +1,11 @@
 {
     "APP": {
         "TITLE": "Automaten Simulation",
-        "UNSAVEDCHANGES": "Ungesicherte Veränderungen."
+        "UNSAVEDCHANGES": "Ungesicherte Änderungen."
     },
 
     "NAVBAR": {
+        "ZOOM": "Zoom",
         "TTTEXT_ZOOM_IN": "Vergrößern",
         "TTTEXT_ZOOM_OUT": "Verkleinern",
         "TTTEXT_RESCALE": "Reskalieren",
@@ -12,17 +13,21 @@
         "TTTEXT_IMPORT": "Importieren",
         "TTTEXT_ADDSTATE": "Zustand hinzufügen",
         "TTTEXT_ADDTRANS": "Übergang hinzufügen",
-        "TTTEXT_REMALL": "Reset Automat"
+        "TTTEXT_REMALL": "Reset Automat",
+        "TTTEXT_SAVEASPNG": "Bild speichern",
+        "TTTEXT_CHEATSHEET": "Tastenkürzel",
+        "FIT_WINDOW": "Fenster ausfüllen"
     },
 
     "LANG_DROP": {
+        "TITLE": "Sprache",
         "ENGLISH": "Englisch",
         "GERMAN": "Deutsch"
     },
 
     "SIM": {
         "TITLE": "Simulation",
-        "INPUT": "Eingabewort",
+        "INPUT": "Eingabe",
         "PLAY": "Start",
         "PAUSE": "Pause",
         "STOP": "Stop",
@@ -59,12 +64,17 @@
         "FINALSTATE": "Endzustand",
         "SAVE": "Speichern",
         "NAME_ALREADY_EXIST": "Zustandsname bereits verwendet!",
-        "NAME_TOO_SHORT": "Zustandsname zu kurz!"
+        "NAME_TOO_SHORT": "Zustandsname zu kurz!",
+        "DELETE_MODAL_TITLE": "Zustand löschen",
+        "DELETE_MODAL_DESC": "Wollen sie den Zustand und alle zugehörigen Zustandsübergänge löschen?"
     },
+
     "TRANS_MENU": {
         "TITLE": "Zustandsübergangsmenü",
         "NEXTSTATE": "Nächster Zustand",
-        "NAME": "Name"
+        "NAME": "Zeichen",
+        "NAME_TOO_SHORT": "Zeichen zu kurz",
+        "NAME_ALREADY_EXISTS": "Zeichen existiert bereits"
     },
 
     "TABLE": {
@@ -79,5 +89,23 @@
         "TTSTART": "Startzustand",
         "TTFINAL": "Endzustände",
         "F": "E"
+    },
+
+    "MODAL_BUTTON": {
+        "PROCEED": "Fortfahren",
+        "DELETE": "Löschen",
+        "UPDATE": "Aktualisieren",
+        "IMPORT": "Importieren",
+        "DECLINE": "Abbrechen"
+    },
+
+    "RESET_BUTTON_MODAL": {
+        "TITLE": "Reset Automat",
+        "DESC": "Soll der vorhandene Automat wirklich gelöscht werden?"
+    },
+
+    "IMPORT": {
+        "TITLE": "Import",
+        "DESC": "Wollen sie den aktuellen Automaten durch den importierten Automaten überschreiben?"
     }
 }

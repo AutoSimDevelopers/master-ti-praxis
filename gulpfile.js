@@ -28,7 +28,30 @@ var pipes = {};
 pipes.uglifyAndConcat = function () {
     return;
 };
+///////////////////////////
+// JAVASCRIPT
+////////////////////////////
+gulp.task('pda', function () {
+    return gulp.src(['app/js/pda/*.js', '!app/js/pda/PDAall.js', '!app/js/pda/PDAall.min.js'])
+        .pipe(concat('PDAall.js'))
+        .pipe(gulp.dest('app/js/pda/'))
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest('app/js/pda/'));
+});
 
+gulp.task('dfa', function () {
+    return gulp.src(['app/js/dfa/*.js', '!app/js/dfa/DFAall.js', '!app/js/dfa/DFAall.min.js'])
+        .pipe(concat('DFAall.js'))
+        .pipe(gulp.dest('app/js/dfa/'))
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest('app/js/dfa/'));
+});
 
 ///////////////////////////
 // Styles
@@ -142,6 +165,8 @@ gulp.task('live', function () {
         livereload: true,
     });
     gulp.watch(paths.sass, ['styles']);
+    gulp.watch("app/js/dfa/*.js", ['dfa']);
+    gulp.watch("app/js/pda/*.js", ['pda']);
     gulp.watch(paths.all, function (obj) {
         if (obj.type === 'changed') {
             console.log(obj.path + ' changed');

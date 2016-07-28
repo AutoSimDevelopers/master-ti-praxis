@@ -1,16 +1,14 @@
-
-
-//GRAPHDESIGNER for the svg diagramm
+//TESTDATA
 function TestData($scope) {
     "use strict";
     var self = this;
 
-    self.testDFA = function() {
+    self.testDFA = function () {
         $scope.config.inputWord = "abc";
         $scope.addStateWithPresets(100, 100);
         $scope.addStateWithPresets(100, 300);
         $scope.addStateWithPresets(300, 300);
-        $scope.addStateWithPresets( 300, 100);
+        $scope.addStateWithPresets(300, 100);
         $scope.addFinalState(3);
 
 

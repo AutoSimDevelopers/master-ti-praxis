@@ -1,5 +1,5 @@
-//GRAPHDESIGNER for the svg diagramm
-function GraphdesignerDFA($scope, svgSelector) {
+//statediagram for the svg diagramm
+function StateDiagramDFA($scope, svgSelector) {
     "use strict";
 
     var self = this;
@@ -17,7 +17,7 @@ function GraphdesignerDFA($scope, svgSelector) {
     //user can snap the states to the grid -> toggles snapping
     self.snapping = true;
 
-    //graphdesigner settings
+    //statediagram settings
     self.settings = {
         stateRadius: 25,
         finalStateRadius: 29,
@@ -30,11 +30,6 @@ function GraphdesignerDFA($scope, svgSelector) {
     //for the selfReference transition
     self.stateSelfReferenceNumber = Math.sin(45 * (Math.PI / 180)) * self.settings.stateRadius;
 
-    //has the drawn Transition
-    //{fromState:0,toState:0,names:["a","b"], objReference:};
-    //if there is already a transition with the right fromState and toState, thenn only add myname to the names array
-    $scope.drawnTransitions = [];
-
     /**
      * Check if transition already drawn
      * @param   {number}  fromState 
@@ -44,8 +39,8 @@ function GraphdesignerDFA($scope, svgSelector) {
     self.existsDrawnTransition = function (fromState, toState) {
 
         var tmp = false;
-        for (var i = 0; i < $scope.drawnTransitions.length; i++) {
-            var transition = $scope.drawnTransitions[i];
+        for (var i = 0; i < $scope.config.drawnTransitions.length; i++) {
+            var transition = $scope.config.drawnTransitions[i];
             if (transition.fromState == fromState && transition.toState == toState) {
                 tmp = true;
             }
@@ -60,8 +55,8 @@ function GraphdesignerDFA($scope, svgSelector) {
      * @returns {object} 
      */
     self.getDrawnTransition = function (fromState, toState) {
-        for (var i = 0; i < $scope.drawnTransitions.length; i++) {
-            var transition = $scope.drawnTransitions[i];
+        for (var i = 0; i < $scope.config.drawnTransitions.length; i++) {
+            var transition = $scope.config.drawnTransitions[i];
             if (transition.fromState == fromState && transition.toState == toState) {
                 return transition;
             }
@@ -79,7 +74,7 @@ function GraphdesignerDFA($scope, svgSelector) {
         //Clear the content of the svg
         self.svgTransitions.html("");
         self.svgStates.html("");
-        $scope.drawnTransitions = [];
+        $scope.config.drawnTransitions = [];
         //change the scale and the translate to the defaultConfit
         self.svg.attr("transform", "translate(" + $scope.defaultConfig.diagramm.x + "," + $scope.defaultConfig.diagramm.y + ")" + " scale(" + $scope.defaultConfig.diagramm.scale + ")");
         svgOuterZoomAndDrag.scale($scope.defaultConfig.diagramm.scale);
@@ -275,7 +270,7 @@ function GraphdesignerDFA($scope, svgSelector) {
     self.isGrid = true;
 
     //watcher for the grid when changed -> updateGrid
-    $scope.$watch('[graphdesigner.isGrid , config.diagramm]', function () {
+    $scope.$watch('[statediagram.isGrid , config.diagramm]', function () {
         self.drawGrid();
     }, true);
 
@@ -326,6 +321,15 @@ function GraphdesignerDFA($scope, svgSelector) {
     //Marker-Arrow ( for the transitions)
     self.defs.append('svg:marker')
         .attr('id', 'marker-end-arrow')
+        .attr('refX', 7.5)
+        .attr('refY', 3)
+        .attr('markerWidth', 10)
+        .attr('markerHeight', 10)
+        .attr('orient', 'auto')
+        .append('svg:path')
+        .attr('d', 'M0,0 L0,6 L9,3 z');
+    self.defs.append('svg:marker')
+        .attr('id', 'marker-end-arrow-create')
         .attr('refX', 7.5)
         .attr('refY', 3)
         .attr('markerWidth', 10)
@@ -392,9 +396,9 @@ function GraphdesignerDFA($scope, svgSelector) {
             //remove class
             self.selectedState.objReference.classed("state-in-creation", false);
             //update the stateData
-
             self.selectedState.x = (((d3.mouse(this)[0]) - $scope.config.diagramm.x) * (1 / $scope.config.diagramm.scale));
             self.selectedState.y = (((d3.mouse(this)[1]) - $scope.config.diagramm.y) * (1 / $scope.config.diagramm.scale));
+            self.selectedState.objReference.attr("transform", "translate(" + self.selectedState.x + " " + self.selectedState.y + ")");
             //remove mousemove listener
             self.svgOuter.on("mousemove", null);
             //overwrite the click listener
@@ -427,7 +431,7 @@ function GraphdesignerDFA($scope, svgSelector) {
                 //the line itself with the arrow without the path itself
                 self.tmpTransitionline = self.tmpTransition.append("path")
                     .attr("class", "transition-line curvedLine in-creation")
-                    .attr("marker-end", "url(#marker-end-arrow)")
+                    .attr("marker-end", "url(#marker-end-arrow-create)")
                     .attr("fill", "none");
 
                 //if already selected a state then create transition to the clickedState
@@ -582,7 +586,7 @@ function GraphdesignerDFA($scope, svgSelector) {
         //if its the only transition in the drawn transition -> then remove the drawn transition
         if (tmpDrawnTransition.names.length === 1) {
             tmpDrawnTransition.objReference.remove();
-            _.remove($scope.drawnTransitions, function (n) {
+            _.remove($scope.config.drawnTransitions, function (n) {
                 return n == tmpDrawnTransition;
             });
             //if there is an approad transition, then draw it with the new drawconfig
@@ -778,7 +782,7 @@ function GraphdesignerDFA($scope, svgSelector) {
         $scope.safeApply();
         self.stateMenuListener = [];
         //Menu watcher
-        self.stateMenuListener.push($scope.$watch('graphdesigner.input.startState', function (newValue, oldValue) {
+        self.stateMenuListener.push($scope.$watch('statediagram.input.startState', function (newValue, oldValue) {
             if (newValue !== oldValue) {
                 if (self.input.startState) {
                     $scope.changeStartState(self.input.state.id);
@@ -789,7 +793,7 @@ function GraphdesignerDFA($scope, svgSelector) {
             }
 
         }));
-        self.stateMenuListener.push($scope.$watch('graphdesigner.input.finalState', function (newValue, oldValue) {
+        self.stateMenuListener.push($scope.$watch('statediagram.input.finalState', function (newValue, oldValue) {
             if (newValue !== oldValue) {
                 if (self.input.finalState) {
                     $scope.addFinalState(self.input.state.id);
@@ -800,7 +804,7 @@ function GraphdesignerDFA($scope, svgSelector) {
             }
 
         }));
-        self.stateMenuListener.push($scope.$watch('graphdesigner.input.stateName', function (newValue, oldValue) {
+        self.stateMenuListener.push($scope.$watch('statediagram.input.stateName', function (newValue, oldValue) {
             //if the name got changed but is not empty
             //reset the tooltip
             self.input.tttisopen = false;
@@ -1294,7 +1298,7 @@ function GraphdesignerDFA($scope, svgSelector) {
                     .attr("y", y);
             }
             //add the drawnTransition
-            group.attr("object-id", $scope.drawnTransitions.push({
+            group.attr("object-id", $scope.config.drawnTransitions.push({
                 fromState: transition.fromState,
                 toState: transition.toState,
                 names: [{
@@ -1395,7 +1399,7 @@ function GraphdesignerDFA($scope, svgSelector) {
 
         /*jshint -W083 */
         for (var i = 0; i < self.input.transitions.length; i++) {
-            self.transitionMenuListener.push($scope.$watchCollection("graphdesigner.input.transitions['" + i + "']", function (newValue, oldValue) {
+            self.transitionMenuListener.push($scope.$watchCollection("statediagram.input.transitions['" + i + "']", function (newValue, oldValue) {
                 if (newValue.name !== oldValue.name) {
                     newValue.tttisopen = false;
                     if (newValue.name !== "" && !$scope.existsTransition(fromState, toState, newValue.name)) {
@@ -1407,6 +1411,7 @@ function GraphdesignerDFA($scope, svgSelector) {
                         newValue.tttisopen = true;
                         newValue.ttt = 'TRANS_MENU.NAME_ALREAD_EXISTS';
                     }
+                    console.log(($scope.existsTransition(fromState, toState, newValue.name, newValue.id)));
                 }
             }));
         }
@@ -1437,7 +1442,7 @@ function GraphdesignerDFA($scope, svgSelector) {
      */
     self.updateTransitionsAfterStateDrag = function (stateId) {
         var stateName = $scope.config.states[$scope.getArrayStateIdByStateId(stateId)].name;
-        _.forEach($scope.drawnTransitions, function (n, key) {
+        _.forEach($scope.config.drawnTransitions, function (n, key) {
             if (n.fromState == stateId || n.toState == stateId) {
                 //if its not a selfreference
                 var obj = n.objReference,

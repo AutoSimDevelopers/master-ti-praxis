@@ -5868,6 +5868,9 @@ button.close {
 #marker-end-arrow-animated {
   fill: #ff7b00; }
 
+#marker-end-arrow-create {
+  fill: #00b7ff; }
+
 .grid-line {
   stroke: #B3AEAE; }
 
@@ -6268,10 +6271,10 @@ button:disabled .icon {
 .dropdown li a {
   cursor: pointer; }
 
-.icon-check {
+.green {
   color: limegreen; }
 
-.icon-times {
+.red {
   color: red; }
 
 .stf-element {
@@ -6309,3 +6312,9 @@ rzslider .rz-pointer:after {
 
 .border-top {
   border-top: 1px solid #CCC; }
+
+.border-bottom {
+  border-bottom: 1px solid #CCC; }
+
+.input-group .form-control {
+  height: auto !important; }

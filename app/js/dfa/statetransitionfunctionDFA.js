@@ -33,7 +33,7 @@ function StatetransitionfunctionDFA($scope) {
         _.forEach($scope.config.states, function (state, key) {
             stringStates = '';
             var selectedClass = '';
-            if ($scope.graphdesigner.selectedState !== null && $scope.graphdesigner.selectedState.id == state.id) {
+            if ($scope.statediagram.selectedState !== null && $scope.statediagram.selectedState.id == state.id) {
                 selectedClass = "selected";
             }
             if (state.id == $scope.simulator.animated.currentState && $scope.simulator.status === "accepted") {
@@ -65,7 +65,7 @@ function StatetransitionfunctionDFA($scope) {
                 if (transition.fromState === state.id) {
                     var stateTransition = transition;
                     var selectedTransition = false;
-                    if ($scope.graphdesigner.selectedTransition !== null && _.find($scope.graphdesigner.selectedTransition.names, {
+                    if ($scope.statediagram.selectedTransition !== null && _.find($scope.statediagram.selectedTransition.names, {
                             id: transition.id
                         }) !== undefined) {
                         selectedTransition = true;
@@ -127,13 +127,13 @@ function StatetransitionfunctionDFA($scope) {
         }
     });
 
-    $scope.$watch('graphdesigner.selectedState', function (newValue, oldValue) {
+    $scope.$watch('statediagram.selectedState', function (newValue, oldValue) {
         if (newValue !== oldValue) {
             self.updateFunction();
         }
     });
 
-    $scope.$watch('graphdesigner.selectedTransition', function (newValue, oldValue) {
+    $scope.$watch('statediagram.selectedTransition', function (newValue, oldValue) {
         if (newValue !== oldValue) {
             self.updateFunction();
         }

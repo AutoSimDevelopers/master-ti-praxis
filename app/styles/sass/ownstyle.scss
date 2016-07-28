@@ -88,6 +88,10 @@ $selectedColor:#00b7ff;
     fill: $animatedTransitionColor;
 }
 
+#marker-end-arrow-create {
+    fill: $selectedColor;
+}
+
 //grid
 .grid-line {
     stroke: $gridLine;
@@ -415,7 +419,7 @@ button:disabled .icon {
     position: absolute;
     bottom: 0;
     padding: 5px;
-    right:0;
+    right: 0;
 }
 
 .right-menu-bottom .icon {
@@ -611,11 +615,11 @@ button:disabled .icon {
     cursor: pointer;
 }
 
-.icon-check {
+.green {
     color: limegreen;
 }
 
-.icon-times {
+.red {
     color: red;
 }
 
@@ -669,4 +673,12 @@ body .transbutton {
 
 .border-top {
     border-top: 1px solid #CCC;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #CCC;
+}
+
+.input-group .form-control {
+    height: auto !important;
 }

@@ -13,13 +13,9 @@ var autoSim = angular.module('automata-simulation', [
         templateUrl: 'view/dfa.html',
         controller: 'DFACtrl'
     });
-    $routeProvider.when('/dfa2', {
-        templateUrl: 'view/dfa2.html',
-        controller: 'DFACtrl'
-    });
-    $routeProvider.when('/dpa', {
-        templateUrl: 'view/dpa.html',
-        controller: 'DPACtrl'
+    $routeProvider.when('/pda', {
+        templateUrl: 'view/pda.html',
+        controller: 'PDACtrl'
     });
     $routeProvider.otherwise({
         redirectTo: '/dfa'
@@ -97,6 +93,7 @@ autoSim.directive("menuitem", function () {
 //Language Controller
 autoSim.controller("LangCtrl", ['$scope', '$translate', function ($scope, $translate) {
     $scope.changeLang = function (key) {
+        console.log(key);
         $translate.use(key).then(function (key) {
             console.log("Sprache zu " + key + " gewechselt.");
             $scope.getCurrentLanguage();
@@ -131,7 +128,7 @@ autoSim.controller("portationCtrl", ['$scope', function ($scope) {
          */
         function getTransitions() {
             var allTransitions = [];
-            _.forEach($scope.config.transitions, function (transition, key) {
+            _.forEach($scope.$parent.config.transitions, function (transition, key) {
                 var tmpTransition = JSON.parse(JSON.stringify(transition));
                 delete tmpTransition.objReference;
                 allTransitions.push(tmpTransition);
@@ -145,16 +142,16 @@ autoSim.controller("portationCtrl", ['$scope', function ($scope) {
          */
         function getStates() {
             var allStates = [];
-            _.forEach($scope.config.states, function (state, key) {
+            _.forEach($scope.$parent.config.states, function (state, key) {
                 var tmpState = JSON.parse(JSON.stringify(state));
                 delete tmpState.objReference;
                 allStates.push(tmpState);
             });
             return allStates;
         }
-        $scope.config.unSavedChanges = false;
+        $scope.$parent.config.unSavedChanges = false;
         //workaround: couldnt add new states after export
-        $scope.$parent.graphdesigner.resetAddActions();
+        $scope.$parent.statediagram.resetAddActions();
         var exportData = {};
         exportData = $scope.config;
         exportData.transitions = getTransitions();
@@ -173,7 +170,15 @@ autoSim.controller("portationCtrl", ['$scope', function ($scope) {
     };
 
     $scope.import = function () {
-        //Called when the user clicks on the import Button and opens the hidden-file-input
+        if ($scope.$parent.config.states.length === 0) {
+            $scope.$parent.importFile();
+        } else {
+            $scope.$parent.showModalWithMessage('IMPORT.TITLE', 'IMPORT.DESC', 'importFile()');
+            //Called when the user clicks on the import Button and opens the hidden-file-input
+        }
+    };
+
+    $scope.$parent.importFile = function () {
         angular.element('#hidden-file-upload').trigger('click');
     };
 
@@ -220,7 +225,7 @@ autoSim.controller("portationCtrl", ['$scope', function ($scope) {
         $scope.$parent.config = tmpObject;
         createOtherObjects(jsonObj);
         console.log($scope.$parent.config);
-        $scope.$parent.graphdesigner.updateZoomBehaviour();
+        $scope.$parent.statediagram.updateZoomBehaviour();
     };
 
     function createOtherObjects(jsonObj) {
@@ -242,7 +247,10 @@ autoSim.controller("portationCtrl", ['$scope', function ($scope) {
 
     document.getElementById('hidden-file-upload').addEventListener('change', handleFileSelect, false);
 
-}]);
+            }]);
+
+
+
 
 
 //from: http://stackoverflow.com/questions/19415394/with-ng-bind-html-unsafe-removed-how-do-i-inject-html

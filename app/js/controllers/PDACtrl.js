@@ -1,11 +1,11 @@
 angular
     .module('automata-simulation')
-    .controller('DFACtrl', DFACtrl);
+    .controller('PDACtrl', PDACtrl);
 
 
-function DFACtrl($scope, hotkeys) {
+function PDACtrl($scope, hotkeys) {
     console.log("created DFA");
-    var dfa = new DFA($scope);
+    var pda = new PDA($scope);
 
 
     $scope.scrollConfig = {
@@ -16,8 +16,7 @@ function DFACtrl($scope, hotkeys) {
         },
         setHeight: 220,
         scrollInertia: 0
-    };
-    //HOTKEY
+    }; //HOTKEY
     hotkeys.add({
         combo: 'ctrl+q',
         allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],

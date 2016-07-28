@@ -1,4 +1,9 @@
 #Automata Simulation
+This project was founded to facilitate the understanding and learning of the automatatheory for students.
+This application is a project as a part of the informaticsproject in the 5th semester at the technical university
+of cologne. Automata-Simulation stands for modelling and simulating of automata from the automatatheory. Our concern 
+is to visualize and clarify the principles and peculiarities of the automatatheory and to be the bridge from intellectual 
+knowledge to pictorial understanding.
 
 ##Future Features
 - Push-Down Automaton (PDA)

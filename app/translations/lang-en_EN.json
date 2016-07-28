@@ -1,7 +1,11 @@
 {
-    "APP_TITLE": "Automata Simulation",
+    "APP": {
+        "TITLE": "Automaten Simulation",
+        "UNSAVEDCHANGES": "Unsaved Changes"
+    },
 
     "NAVBAR": {
+        "ZOOM": "Zoom",
         "TTTEXT_ZOOM_IN": "Zoom In",
         "TTTEXT_ZOOM_OUT": "Zoom Out",
         "TTTEXT_RESCALE": "Rescale",
@@ -9,19 +13,23 @@
         "TTTEXT_IMPORT": "Import",
         "TTTEXT_ADDSTATE": "Add State",
         "TTTEXT_ADDTRANS": "Add Transition",
-        "TTTEXT_REMALL": "Reset Automaton"
+        "TTTEXT_REMALL": "Reset Automaton",
+        "TTTEXT_SAVEASPNG": "Save as png",
+        "TTTEXT_CHEATSHEET": "Hotkeys",
+        "FIT_WINDOW": "Fit Window"
     },
-    
+
     "LANG_DROP": {
+        "TITLE": "Language",
         "ENGLISH": "English",
         "GERMAN": "German"
     },
 
-
     "SIM": {
         "TITLE": "Simulation",
-        "INPUT": "Inputword",
-        "PLAYPAUSE": "Start/Pause",
+        "INPUT": "Input",
+        "PLAY": "Play",
+        "PAUSE": "Pause",
         "STOP": "Stop",
         "STEPBACKWARD": "Step Backward",
         "STEPFORWARD": "Step Forward"
@@ -40,6 +48,9 @@
         "TITLE": "Developer"
     },
 
+    "DIA": {
+        "TITLE": "Zustandsübergangsdiagramm"
+    },
 
     "DIA_SET": {
         "TITLE": "Diagramm Settings",
@@ -48,20 +59,30 @@
         "SNAPPING": "Snapping"
     },
 
-
-    "STATE_SET": {
-        "TITLE": "StateMenu",
+    "STATE_MENU": {
+        "TITLE": "Statemenu",
         "NAME": "Name",
-        "STARTSTATE": "StartState",
-        "FINALSTATE": "FinalState",
-        "SAVE": "Save"
+        "STARTSTATE": "Startstate",
+        "FINALSTATE": "Finalstate",
+        "SAVE": "Save",
+        "NAME_ALREADY_EXIST": "Statename already exists!",
+        "NAME_TOO_SHORT": "Statename too short!",
+        "DELETE_MODAL_TITLE": "Delete State",
+        "DELETE_MODAL_DESC": "Do you want to delete the state with all the connected transitions?"
     },
-    
-    "TABLE":{
+
+    "TRANS_MENU": {
+        "TITLE": "Transitionmenu",
+        "NEXTSTATE": "Next State",
+        "NAME": "Char",
+        "NAME_TOO_SHORT": "Char too short!",
+        "NAME_ALREADY_EXIST": "Transition char already exists!"
+    },
+
+    "TABLE": {
         "TITLE": "Statetable"
     },
-    
-    
+
     "STF": {
         "TITLE": "Statetransitionfunction",
         "TTSIGMA": "Alphabet",
@@ -70,6 +91,23 @@
         "TTSTART": "Startstate",
         "TTFINAL": "Finalstates",
         "F": "F"
-        
+    },
+
+    "MODAL_BUTTON": {
+        "PROCEED": "Proceed",
+        "DELETE": "Delete",
+        "UPDATE": "Update",
+        "IMPORT": "Import",
+        "DECLINE": "Decline"
+    },
+
+    "RESET_BUTTON_MODAL": {
+        "TITLE": "Reset automaton",
+        "DESC": "Are you sure you want to reset the automaton?"
+    },
+
+    "IMPORT": {
+        "TITLE": "Import",
+        "DESC": "Do you want to override the current Automaton with the imported Automaton?"
     }
 }

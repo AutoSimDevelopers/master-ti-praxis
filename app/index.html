@@ -12,19 +12,15 @@
     <title translate="APP.TITLE"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <link href="https://file.myfontastic.com/7CZ8hX584jz7dFx7nc4HnM/icons.css" rel="stylesheet">
+    <!-- bower:css -->
     <link href="bower_components/flag-icon-css/css/flag-icon.css" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css" />
-    <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/json-formatter/dist/json-formatter.css">
-    <!-- endbower -->
     <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css" />
     <link rel="stylesheet" href="bower_components/angular-hotkeys/build/hotkeys.css" type="text/css" />
     <link rel="stylesheet" href="bower_components/ng-joyride/ng-joyride.css" type="text/css" />
-
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- endbower -->
     <!-- Our styles. To override the other styles it is important that this is the last link. -->
     <link rel="stylesheet" href="styles/css/style.css">
 </head>
@@ -67,12 +63,15 @@
     <script src="js/TestData.js"></script>
     <!-- DFA:START-->
     <script src="js/controllers/DFACtrl.js"></script>
-    <script src="js/dfa/DFA.js"></script>
-    <script src="js/dfa/GraphdesignerDFA.js"></script>
-    <script src="js/dfa/SimulationDFA.js"></script>
-    <script src="js/dfa/tableDFA.js"></script>
-    <script src="js/dfa/StatetransitionfunctionDFA.js"></script>
+    <script src="js/dfa/DFAall.min.js"></script>
     <!-- DFA:END-->
+    <!-- PDA:START-->
+    <script src="js/controllers/PDACtrl.js"></script>
+    <script src="js/PDA/PDA.min.js"></script>
+
+
+
+    <!-- PDA:END-->
 </body>
 
 </html>
